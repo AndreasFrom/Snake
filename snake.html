@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>Canvas</title>
+    <script type="text/javascript" src="snake.js"></script>
+    <script type="text/javascript">
+      function DisplayPlayer2 () {
+        Multiplayer = document.getElementById("multiplayer").checked;
+        var player2 = document.getElementById("player2");
+
+        if (Multiplayer) {
+          player2.style.visibility = "visible";
+        }
+        else
+          player2.style.visibility = "hidden";
+      }
+
+function StartGame() {
+  Multiplayer = document.getElementById("multiplayer").checked;
+  Init(Multiplayer);
+  SnakeGame.Player.Name = document.getElementById("player1name").value;
+  SnakeGame.Player.Color = document.getElementById("player1color").value;
+  if (Multiplayer) {
+    SnakeGame.Player2.Name = document.getElementById("player2name").value;
+    SnakeGame.Player2.Color = document.getElementById("player2color").value;
+  }
+  document.getElementById("controls").style.visibility = "hidden";
+}
+</script>
+<meta charset="utf-8"/>
+<body>
+  <canvas style="border:1px solid #000;" id="canvas" width="400" height="400">
+  Please update your browser to one that supports HTML5 and Canvas
+  </canvas>
+  <div id="controls" style="visibility:visible">
+    <br />
+    <span>2 Players: </span><input id="multiplayer" onchange="DisplayPlayer2()" type="checkbox" value="multiplayer" name="multiplayer"/>
+    <br />
+    <span>Player 1 name: </span> <input type="text" id="player1name"/>
+    <span>Player 1 colour: </span>
+    <select id="player1color">
+      <option>Red</option>
+      <option value="#00fff00">Green</option>
+      <option>Blue</option>
+      <option>Black</option>
+    </select>
+    <div id="player2" style="visibility:hidden">
+      <span>Player 2 name: </span> <input type="text" id="player2name"/>
+      <span>Player 2 colour: </span>
+      <select id="player2color">
+        <option>Red</option>
+        <option value="#00ff00">Green</option>
+        <option>Blue</option>
+        <option>Black</option>
+      </select>
+    </div>
+    <br />
+    <button onclick="StartGame()">Play!</button>
+  </div>
+</body>
+</html>
