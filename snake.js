@@ -1,4 +1,4 @@
-function Init(multiplayer) {
+var Init = function(multiplayer) {
   SnakeGame = {};
   SnakeGame.General = {};
   SnakeGame.Fruit = {};
@@ -28,7 +28,7 @@ function Init(multiplayer) {
   window.addEventListener("keydown",doKeyDown,true);
 }
 
-function Snake(color) {
+var Snake = function(color) {
   this.X = Math.round(Math.random()*SnakeGame.General.Width);
   this.Y = Math.round(Math.random()*SnakeGame.General.Height);
   this.XArray = new Array();
@@ -90,7 +90,7 @@ function Snake(color) {
     }
 }
 
-function Fruit(color){
+var Fruit = function(color){
   this.Color = color;
   this.Radius = 10;
   
@@ -107,7 +107,7 @@ function Fruit(color){
   }
 }
 
-function doKeyDown(e)
+var doKeyDown = function(e)
 {
   switch (e.keyCode) {
     case 38:
@@ -149,7 +149,7 @@ function doKeyDown(e)
   }
 }
 
-function VanishFruit(fruit) {
+var VanishFruit = function(fruit) {
   if (fruit.Radius > 1)
     fruit.Radius -= 0.01;
   else {
@@ -158,7 +158,7 @@ function VanishFruit(fruit) {
   }
 }
 
-function HandleSnake(snake,other) {
+var HandleSnake = function(snake,other) {
   snake.Move();
   snake.Draw();
   snake.SortTale();
@@ -169,7 +169,7 @@ function HandleSnake(snake,other) {
     snake.HandleSnakeCollision(other);
 }
 
-function GameLoop() {
+var GameLoop = function() {
   if (SnakeGame.General.Multiplayer)
     document.title = SnakeGame.Player.Name+": "+SnakeGame.Player.Score+" : "+SnakeGame.Player2.Name+": "+SnakeGame.Player2.Score;
   else
