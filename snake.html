@@ -19,11 +19,11 @@
 function StartGame() {
   Multiplayer = document.getElementById("multiplayer").checked;
   Init(Multiplayer);
-  SnakeGame.Player.Name = document.getElementById("player1name").value;
-  SnakeGame.Player.Color = document.getElementById("player1color").value;
+  Player.Name = document.getElementById("player1name").value;
+  Player.Color = document.getElementById("player1color").value;
   if (Multiplayer) {
-    SnakeGame.Player2.Name = document.getElementById("player2name").value;
-    SnakeGame.Player2.Color = document.getElementById("player2color").value;
+    Player2.Name = document.getElementById("player2name").value;
+    Player2.Color = document.getElementById("player2color").value;
   }
   document.getElementById("controls").style.visibility = "hidden";
 }
