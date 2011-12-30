@@ -10,6 +10,8 @@ var SnakeGame = (function () {
 
     canvas = document.getElementById("canvas");
     ctx = canvas.getContext("2d");
+    canvas.width = document.width/2;
+    canvas.height = document.height/2;
     General.Width = canvas.width;
     General.Height = canvas.height;
     General.Directions = ["up","down","right","left"];

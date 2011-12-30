@@ -11,6 +11,7 @@ var SnakeGameUI = (function() {
   }
 
   this.StartGame = function () {
+
     Multiplayer = document.getElementById("multiplayer").checked;
     Init(Multiplayer);
     Player.Name = document.getElementById("player1name").value;
