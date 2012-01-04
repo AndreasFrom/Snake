@@ -179,10 +179,9 @@ var SnakeGame = (function () {
   }
 
   this.GameLoop = function() {
+      document.getElementById("player1").innerHTML = Player.Name + ": " + Player.Score;
     if (General.Multiplayer)
-      document.title = Player.Name+": "+Player.Score+" : "+Player2.Name+": "+Player2.Score;
-    else
-      document.title = Player.Name+": "+Player.Score;
+      document.getElementById("player2").innerHTML = Player2.Name + ": " + Player2.Score;
     ctx.clearRect(0,0,General.Width,General.Height);
 
     HandleSnake(Player,Player2);
