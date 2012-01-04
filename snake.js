@@ -10,11 +10,13 @@ var SnakeGame = (function () {
 
     canvas = document.getElementById("canvas");
     ctx = canvas.getContext("2d");
-    canvas.width = document.width/2;
-    canvas.height = document.height/2;
     General.Width = canvas.width;
     General.Height = canvas.height;
     General.Directions = ["up","down","right","left"];
+
+    General.FullFruitRadius = 15;
+    General.FullSnakeRadius = 12;
+    General.InitSnakeLength = 20;
 
     Player = new Snake("#000");
     if (General.Multiplayer) {
@@ -40,9 +42,9 @@ var SnakeGame = (function () {
     this.Y = Math.round(Math.random()*General.Height);
     this.XArray = new Array();
     this.YArray = new Array();
-    this.Direction = General.Directions[Math.round(Math.random()*3)];
-    this.Radius = 10;
-    this.SnakeLength = 20;
+    this.Direction = General.Directions[Math.round(Math.random()*General.Directions.length)];
+    this.Radius = General.FullSnakeRadius;
+    this.SnakeLength = General.InitSnakeLength;
     this.Velocity = 1;
     this.Score = 0;
     this.PosCount = 0;
@@ -83,7 +85,7 @@ var SnakeGame = (function () {
         this.SnakeLength += _Length;
         this.Score += Math.round(_Score);
         this.Velocity += _Speed;
-        _Fruit.Radius = 10;
+        _Fruit.Radius = General.FullFruitRadius;
         _Fruit.Calc();
       }
     }
@@ -91,7 +93,7 @@ var SnakeGame = (function () {
     this.HandleSnakeCollision = function(_OtherSnake) {
       for (i=0;i<_OtherSnake.SnakeLength;i++) {
         if (_OtherSnake.XArray[i] == this.X && _OtherSnake.YArray[i] == this.Y) {
-          _OtherSnake.SnakeLength = 20;
+          _OtherSnake.SnakeLength = General.InitSnakeLength;
         }
       }
     }
@@ -99,7 +101,7 @@ var SnakeGame = (function () {
 
   this.Fruit = function(_Color){
     this.Color = _Color;
-    this.Radius = 10;
+    this.Radius = General.FullFruitRadius;
 
     this.Calc = function() {
       this.X = Math.round(Math.random()*(General.Width-this.Radius));
@@ -160,7 +162,7 @@ var SnakeGame = (function () {
     if (_Fruit.Radius > 1)
       _Fruit.Radius -= 0.01;
     else {
-      _Fruit.Radius = 10;
+      _Fruit.Radius = General.FullFruitRadius;
       _Fruit.Calc();
     }
   }
@@ -168,9 +170,9 @@ var SnakeGame = (function () {
   this.HandleSnake = function(_Snake,_Other) {
     _Snake.Move();
     _Snake.SortTale();
-    _Snake.HandleFruitCollision(Fruit.Red,20,_Snake.SnakeLength,0);
+    _Snake.HandleFruitCollision(Fruit.Red,General.InitSnakeLength,_Snake.SnakeLength,0);
     _Snake.HandleFruitCollision(Fruit.Green,0,_Snake.SnakeLength*2,0);
-    _Snake.HandleFruitCollision(Fruit.Blue,40,0,0);
+    _Snake.HandleFruitCollision(Fruit.Blue,General.InitSnakeLength*2,0,0);
     if (General.Multiplayer)
       _Snake.HandleSnakeCollision(_Other);
     _Snake.Draw();

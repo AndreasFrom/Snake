@@ -22,5 +22,6 @@ var SnakeGameUI = (function() {
     }
     document.getElementById("controls").style.visibility = "hidden";
     document.getElementById("player2").style.visibility = "hidden";
+    document.getElementById("style").overflow = "hidden";
   }
 }());
