@@ -167,13 +167,13 @@ var SnakeGame = (function () {
 
   this.HandleSnake = function(_Snake,_Other) {
     _Snake.Move();
-    _Snake.Draw();
     _Snake.SortTale();
     _Snake.HandleFruitCollision(Fruit.Red,20,_Snake.SnakeLength,0);
     _Snake.HandleFruitCollision(Fruit.Green,0,_Snake.SnakeLength*2,0);
     _Snake.HandleFruitCollision(Fruit.Blue,40,0,0);
     if (General.Multiplayer)
       _Snake.HandleSnakeCollision(_Other);
+    _Snake.Draw();
   }
 
   this.GameLoop = function() {
