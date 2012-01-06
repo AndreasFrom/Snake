@@ -1,6 +1,6 @@
 A Snake game in javascript
 
 TODO:
-* Style with a .css file
-* Polish the code
-* Polish the user experience
+* Add a timer
+* Use one array for both X and Y positions
+* Polish the user experience (styling, explanations etc.)
