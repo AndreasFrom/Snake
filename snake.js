@@ -13,6 +13,7 @@ var SnakeGame = (function () {
     General.Width = canvas.width;
     General.Height = canvas.height;
     General.Directions = ["up","down","right","left"];
+    (!(General.Timer) ? General.Timer = 60 : 0);
 
     General.FullFruitRadius = 15;
     General.FullSnakeRadius = 12;
@@ -33,7 +34,7 @@ var SnakeGame = (function () {
     Fruits = [Fruit.Red,Fruit.Green,Fruit.Blue];
 
     General.GameLoopID = setInterval(GameLoop,10);
-
+    
     window.addEventListener("keydown",doKeyDown,true);
   }
 
@@ -178,8 +179,15 @@ var SnakeGame = (function () {
     _Snake.Draw();
   }
 
+  this.SecToStr = function(sec)
+  {
+    sec = Math.abs(sec);
+    var minutes = ~~(sec / 60),rsec = sec - (minutes * 60);
+    return (minutes < 10 ? "0"+minutes : minutes) + ":"+ (rsec < 10 ? "0"+rsec : rsec);
+  }
+
   this.GameLoop = function() {
-      document.getElementById("player1").innerHTML = Player.Name + ": " + Player.Score;
+    document.getElementById("player1").innerHTML = Player.Name + ": " + Player.Score;
     if (General.Multiplayer)
       document.getElementById("player2").innerHTML = Player2.Name + ": " + Player2.Score;
     ctx.clearRect(0,0,General.Width,General.Height);
@@ -190,6 +198,13 @@ var SnakeGame = (function () {
 
     for (i=0;i<Fruits.length;i++)
       VanishFruit(Fruits[i]);
+
+    if (General.Timer > 0) {
+      General.Timer -= 0.01;
+      document.getElementById("timer").innerHTML = SecToStr(~~(General.Timer));
+    }
+    else
+      clearInterval(General.GameLoopID);
 
     Fruit.Red.Draw();
     Fruit.Green.Draw();

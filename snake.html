@@ -20,21 +20,19 @@
         <span>Player 1 name: </span> <input type="text" id="player1name"Radius/>
         <span>Player 1 colour: </span>
         <select id="player1color">
-          <option>Red</option>
-          <option value="#00ff00">Green</option>
-          <option>Blue</option>
-          <option>Black</option>
+          <option>Red</option> <option value="#00ff00">Green</option> <option>Blue</option> <option>Black</option>
         </select>
         <div id="player2controls" style="visibility:hidden">
           <span>Player 2 name: </span> <input type="text" id="player2name"/>
           <span>Player 2 colour: </span>
           <select id="player2color">
-            <option>Red</option>
-            <option value="#00ff00">Green</option>
-            <option>Blue</option>
-            <option>Black</option>
+            <option>Red</option> <option value="#00ff00">Green</option> <option>Blue</option> <option>Black</option>
           </select>
         </div>
+        <select id="timerinput" onchange="General.Timer = document.getElementById('timerinput').value">
+          <option value="60">1 minute</option>
+          <option value="120">2 minutes</option>
+        </select>
         <br />
         <button onclick="StartGame()">Play!</button>
       </div>
@@ -43,5 +41,6 @@
         <span style="color: " id="player1"></span>
         <span style="color: " id="player2"></span>
       </div>
+      <p id="timer" style="font-size:50px;text-align:center;margin:0;margin-top:10px"></p>
     </body>
   </html>
