@@ -1,0 +1,6 @@
+A snakegame in Javascript and Canvas/HTML5
+
+TODO:
+* Add timer
+* Use one array for X and Y coordinates
+* Make it more userfriendly
