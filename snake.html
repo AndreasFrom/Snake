@@ -29,9 +29,11 @@
             <option>Red</option> <option value="#00ff00">Green</option> <option>Blue</option> <option>Black</option>
           </select>
         </div>
+        <span>Play for </span>
         <select id="timerinput" onchange="General.Timer = document.getElementById('timerinput').value">
           <option value="60">1 minute</option>
           <option value="120">2 minutes</option>
+          <option value="300">5 minutes</option>
         </select>
         <br />
         <button onclick="StartGame()">Play!</button>

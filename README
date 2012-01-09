@@ -1,6 +1,5 @@
 A snakegame in Javascript and Canvas/HTML5
 
 TODO:
-* Better fruit collision
 * Use one array for X and Y coordinates
 * Make it more user-friendly

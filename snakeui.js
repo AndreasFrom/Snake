@@ -27,3 +27,5 @@ var SnakeGameUI = (function() {
     document.getElementById("player1").style.color = Player.Color;
   }
 }());
+
+document.addEventListener("DOMContentLoaded",SnakeGameUI,false);
