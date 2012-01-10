@@ -82,7 +82,7 @@ var SnakeGame = (function () {
     }
 
     this.HandleFruitCollision = function(_Fruit,_Length,_Score,_Speed) {
-      if (this.X >= (_Fruit.X-_Fruit.Radius) && this.X <= (_Fruit.X+_Fruit.Radius) && this.Y >= (_Fruit.Y-_Fruit.Radius) && this.Y <= (_Fruit.Y+_Fruit.Radius)) {
+      if (this.X+this.Radius/2 >= (_Fruit.X-_Fruit.Radius) && this.X-this.Radius/2 <= (_Fruit.X+_Fruit.Radius) && this.Y+this.Radius/2 >= (_Fruit.Y-_Fruit.Radius) && this.Y-this.Radius/2 <= (_Fruit.Y+_Fruit.Radius)) {
         this.SnakeLength += _Length;
         this.Score += Math.round(_Score);
         this.Velocity += _Speed;
@@ -113,6 +113,7 @@ var SnakeGame = (function () {
       ctx.beginPath();
       ctx.fillStyle = this.Color;
       ctx.arc(this.X,this.Y,this.Radius,0,Math.PI*2,true);
+      ctx.rect(this.X-this.Radius,this.Y-this.Radius,this.Radius*2,this.Radius*2);
       ctx.fill();
     }
   }
