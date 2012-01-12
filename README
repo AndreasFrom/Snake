@@ -1,5 +1,5 @@
 A snakegame in Javascript and Canvas/HTML5
 
 TODO:
-* Use one array for X and Y coordinates
+* Handle gameending
 * Make it more user-friendly

@@ -17,7 +17,7 @@
         <br />
         <span>2 Players: </span><input id="multiplayer" onchange="DisplayPlayer2()" type="checkbox" value="multiplayer" name="multiplayer"/>
         <br />
-        <span>Player 1 name: </span> <input type="text" id="player1name"Radius/>
+        <span>Player 1 name: </span> <input type="text" id="player1name"/>
         <span>Player 1 colour: </span>
         <select id="player1color">
           <option>Red</option> <option value="#00ff00">Green</option> <option>Blue</option> <option>Black</option>
@@ -30,13 +30,13 @@
           </select>
         </div>
         <span>Play for </span>
-        <select id="timerinput" onchange="General.Timer = document.getElementById('timerinput').value">
+        <select id="ti" onchange="General.Timer=this.value">
           <option value="60">1 minute</option>
           <option value="120">2 minutes</option>
           <option value="300">5 minutes</option>
         </select>
         <br />
-        <button onclick="StartGame()">Play!</button>
+        <input type="button" value="Play!" onclick="StartGame()"/>
       </div>
       <br />
       <div id="score" style="visibility:hidden">

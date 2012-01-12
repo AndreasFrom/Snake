@@ -25,6 +25,12 @@ var SnakeGameUI = (function() {
 
     document.getElementById("score").style.visibility = "visible";
     document.getElementById("player1").style.color = Player.Color;
+    window.setInterval(function(){
+      document.getElementById("player1").innerHTML = Player.Name + ": " + Player.Score;
+      if (Multiplayer) {
+        document.getElementById("player2").innerHTML = Player2.Name + ": " + Player2.Score;
+      }
+    },10);
   }
 }());
 
