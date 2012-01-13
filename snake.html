@@ -19,18 +19,18 @@
         <br />
         <span>Player 1 name: </span> <input type="text" id="player1name"/>
         <span>Player 1 colour: </span>
-        <select id="player1color">
+        <select id="player1color" style="border:;" onchange = "SwitchColor()">
           <option>Red</option> <option value="#00ff00">Green</option> <option>Blue</option> <option>Black</option>
         </select>
         <div id="player2controls" style="visibility:hidden">
           <span>Player 2 name: </span> <input type="text" id="player2name"/>
           <span>Player 2 colour: </span>
-          <select id="player2color">
+          <select id="player2color" style="border:;" onchange = "SwitchColor()">
             <option>Red</option> <option value="#00ff00">Green</option> <option>Blue</option> <option>Black</option>
           </select>
         </div>
         <span>Play for </span>
-        <select id="ti" onchange="General.Timer=this.value">
+        <select onchange="General.Timer=this.value">
           <option value="60">1 minute</option>
           <option value="120">2 minutes</option>
           <option value="300">5 minutes</option>

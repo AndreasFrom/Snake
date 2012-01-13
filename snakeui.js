@@ -8,30 +8,58 @@ var SnakeGameUI = (function() {
     }
     else
   player2.style.visibility = "hidden";
+  SwitchColor();
+  }
+
+  this.SwitchColor = function() {
+   var color1 =  document.getElementById("player1color");
+   var color2 =  document.getElementById("player2color");
+      if (color1.value == color2.value) {
+        color1.style.border = 'solid 2px red';
+        color2.style.border = 'solid 2px red';
+        return true;
+      }
+      else {
+        color1.style.border = 'solid 2px green';
+        color2.style.border = 'solid 2px green';
+      }
   }
 
   this.StartGame = function () {
 
     Multiplayer = document.getElementById("multiplayer").checked;
-    Init(Multiplayer);
-    Player.Name = document.getElementById("player1name").value;
-    Player.Color = document.getElementById("player1color").value;
+
+    var name1 = document.getElementById("player1name").value;
+    var color1 = document.getElementById("player1color").value;
+    var color2 = false, name2 = false;
+
     if (Multiplayer) {
-      Player2.Name = document.getElementById("player2name").value;
-      Player2.Color = document.getElementById("player2color").value;
-      document.getElementById("player2").style.color = Player2.Color;
+      name2 = document.getElementById("player2name").value;
+      color2 = document.getElementById("player2color").value;
+      document.getElementById("player1color").style.border = "solid 2px red";
+      document.getElementById("player2color").style.border = "solid 2px red";
+
+      var player2 = document.getElementById("player2");
+      player2.style.color = color2;
+      if (SwitchColor()) {return};
     }
+    
+    var player1 = document.getElementById("player1");
+    player1.style.color = color1;
+
     document.body.removeChild(document.getElementById("controls"));
 
     document.getElementById("score").style.visibility = "visible";
-    document.getElementById("player1").style.color = Player.Color;
+
+
     window.setInterval(function(){
-      document.getElementById("player1").innerHTML = Player.Name + ": " + Player.Score;
+      player1.innerHTML = name1 + ": " + Player.Score;
       if (Multiplayer) {
-        document.getElementById("player2").innerHTML = Player2.Name + ": " + Player2.Score;
+        player2.innerHTML = name2 + ": " + Player2.Score;
       }
     },10);
-  }
+    Init(Multiplayer,color1,name1,color2,name2);
+}
 }());
 
 document.addEventListener("DOMContentLoaded",SnakeGameUI,false);

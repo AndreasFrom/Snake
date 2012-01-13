@@ -5,8 +5,8 @@ var SnakeGame = (function () {
   Player = {};
   Player2 = {};
 
-  this.Init = function(_MultiPlayer) {
-    General.Multiplayer = _MultiPlayer;
+  this.Init = function(_MultiPlayer,color1,name1,color2,name2) {
+    General.MultiPlayer = _MultiPlayer;
 
     canvas = document.getElementById("canvas");
     ctx = canvas.getContext("2d");
@@ -21,8 +21,12 @@ var SnakeGame = (function () {
     General.InitSnakeLength = 20;
 
     Player = new Snake("#000");
-    if (General.Multiplayer) {
+    Player.Color = color1;
+    Player.Name = name1;
+    if (General.MultiPlayer) {
       Player2 = new Snake("#0000ff");
+      Player2.Color = color2;
+      Player2.Name = name2;
     }
 
     Fruit.Red = new Fruit("#ff0000");
@@ -89,13 +93,13 @@ var SnakeGame = (function () {
       }
     };
 
-    this.HandleSnakeCollision = function(_OtherSnake) {
-      for (var i=1;i<_OtherSnake.SnakeLength;i++) {
+    this.HandleSnakeCollision = function(_Other) {
+      for (var i=1;i<_Other.SnakeLength;i++) {
         if (i != this.PosCount-1) {
-          if (_OtherSnake.Pos[i]) {
-            if (this.Pos[0].X == _OtherSnake.Pos[i].X && this.Pos[0].Y == _OtherSnake.Pos[i].Y) {
-              _OtherSnake.SnakeLength = General.InitSnakeLength+1;
-              _OtherSnake.Pos = _OtherSnake.Pos.splice(0,General.InitSnakeLength);
+          if (_Other.Pos[i]) {
+            if (this.Pos[0].X == _Other.Pos[i].X && this.Pos[0].Y == _Other.Pos[i].Y) {
+              _Other.SnakeLength = General.InitSnakeLength+1;
+              _Other.Pos = _Other.Pos.splice(0,General.InitSnakeLength);
             }
           }
         }
@@ -127,7 +131,7 @@ var SnakeGame = (function () {
       case 37: (Player.Direction != "right" ? Player.Direction = "left" : 0); break;
       case 39: (Player.Direction != "left" ? Player.Direction = "right" : 0); break;
     }
-    if (General.Multiplayer) {
+    if (General.MultiPlayer) {
       switch (e.keyCode) {
         case 87: (Player2.Direction != "down" ? Player2.Direction = "up" : 0); break;
         case 83: (Player2.Direction != "up" ? Player2.Direction = "down" : 0); break;
@@ -152,7 +156,7 @@ var SnakeGame = (function () {
     _Snake.HandleFruitCollision(Fruit.Green,0,_Snake.SnakeLength*2,0);
     _Snake.HandleFruitCollision(Fruit.Blue,General.InitSnakeLength*2,0,0);
     _Snake.HandleSnakeCollision(_Snake);
-    if (General.Multiplayer)
+    if (General.MultiPlayer)
       _Snake.HandleSnakeCollision(_Other);
     _Snake.Draw();
   };
@@ -168,7 +172,7 @@ var SnakeGame = (function () {
     ctx.clearRect(0,0,General.Width,General.Height);
 
     HandleSnake(Player,Player2);
-    if (General.Multiplayer)
+    if (General.MultiPlayer)
       HandleSnake(Player2,Player);
 
     for (var i=0;i<Fruits.length;i++)
@@ -178,8 +182,14 @@ var SnakeGame = (function () {
       General.Timer -= 0.01;
       document.getElementById("timer").innerHTML = SecToStr(~~(General.Timer));
     }
-    else
+    else {
       clearInterval(General.GameLoopID);
+      if (General.MultiPlayer) {
+        (Player.Score > Player2.Score ? alert(Player.Name + " wins!") : alert(Player2.Name + " wins!"));
+      }
+      else
+        alert(Player.Name + " got " + Player.Score + " points!");
+    }
 
     Fruit.Red.Draw();
     Fruit.Green.Draw();
