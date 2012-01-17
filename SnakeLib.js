@@ -8,7 +8,7 @@ var SnakeLib = {
   Init: function(_MultiPlayer)
   {
     SnakeLib.Settings.MultiPlayer = _MultiPlayer;
-    SnakeLib.Settings.Timer = "false";
+    SnakeLib.Settings.Timer = "infinite";
     SnakeLib.Settings.ShowTimer = false;
     SnakeLib.Settings.ShowScore = false;
 
@@ -167,7 +167,10 @@ var SnakeLib = {
     var sec = ~~(SnakeLib.Settings.Timer);
     var minutes = ~~(sec / 60),sec = sec - (minutes * 60);
 
+    if (SnakeLib.Settings.Timer != "false")
     SnakeLib.HTML.Timer.innerHTML = (minutes < 10 ? "0"+minutes : minutes) + ":"+ (sec < 10 ? "0"+sec : sec);
+    else
+      SnakeLib.HTML.Timer.innerHTML = "∞";
   },
 
   StartGame: function()
@@ -181,12 +184,11 @@ var SnakeLib = {
 
   TickTime: function()
   {
-    if (SnakeLib.Settings.Timer != "false") {
-    alert(SnakeLib.Settings.Timer);
+    if (SnakeLib.Settings.ShowTimer)
+      SnakeLib.UpdateTimer();
+    if (SnakeLib.Settings.Timer != "infinite") {
       if (SnakeLib.Settings.Timer > 0) {
         SnakeLib.Settings.Timer -= 0.01;
-        if (SnakeLib.Settings.ShowTimer)
-          SnakeLib.UpdateTimer();
       }
       else {
         clearInterval(SnakeLib.General.GameLoopID);
