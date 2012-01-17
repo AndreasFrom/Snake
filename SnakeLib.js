@@ -8,13 +8,15 @@ var SnakeLib = {
   Init: function(_MultiPlayer)
   {
     SnakeLib.Settings.MultiPlayer = _MultiPlayer;
+    SnakeLib.Settings.Timer = "false";
+    SnakeLib.Settings.ShowTimer = false;
+    SnakeLib.Settings.ShowScore = false;
+
     canvas = SnakeLib.HTML.Canvas;
     ctx = canvas.getContext("2d");
     SnakeLib.General.Width = canvas.width;
     SnakeLib.General.Height = canvas.height;
     SnakeLib.General.Directions = ["up","down","right","left"];
-
-    var tmp = (!(SnakeLib.General.Timer) ? SnakeLib.General.Timer = 60 : 0);
 
     SnakeLib.General.FullFruitRadius = 15;
     SnakeLib.General.FullSnakeRadius = 12;
@@ -92,7 +94,7 @@ var SnakeLib = {
         this.Velocity += _Speed;
         _Fruit.Radius = SnakeLib.General.FullFruitRadius;
         _Fruit.Calc();
-        if (SnakeLib.Settings.UpdateScore)
+        if (SnakeLib.Settings.ShowScore)
           SnakeLib.UpdateScore();
       }
     };
@@ -162,7 +164,7 @@ var SnakeLib = {
 
   UpdateTimer: function()
   {
-    var sec = ~~(SnakeLib.General.Timer);
+    var sec = ~~(SnakeLib.Settings.Timer);
     var minutes = ~~(sec / 60),sec = sec - (minutes * 60);
 
     SnakeLib.HTML.Timer.innerHTML = (minutes < 10 ? "0"+minutes : minutes) + ":"+ (sec < 10 ? "0"+sec : sec);
@@ -170,30 +172,38 @@ var SnakeLib = {
 
   StartGame: function()
   {
-    if (SnakeLib.Settings.UpdateScore)
+    if (SnakeLib.Settings.ShowScore)
       SnakeLib.UpdateScore();
 
     SnakeLib.General.GameLoopID = window.setInterval(SnakeLib.GameLoop,10);
     window.addEventListener("keydown",SnakeLib.doKeyDown,true);
   },
 
+  TickTime: function()
+  {
+    if (SnakeLib.Settings.Timer != "false") {
+    alert(SnakeLib.Settings.Timer);
+      if (SnakeLib.Settings.Timer > 0) {
+        SnakeLib.Settings.Timer -= 0.01;
+        if (SnakeLib.Settings.ShowTimer)
+          SnakeLib.UpdateTimer();
+      }
+      else {
+        clearInterval(SnakeLib.General.GameLoopID);
+        if (SnakeLib.Settings.MultiPlayer) {
+          (SnakeLib.Player.Score > SnakeLib.Player2.Score ? alert(SnakeLib.Player.Name + " wins!") : alert(SnakeLib.Player2.Name + " wins!"));
+        }
+        else
+          alert(SnakeLib.Player.Name + " got " + SnakeLib.Player.Score + " points!");
+      }
+    }
+  },
+
   GameLoop: function()
   {
     ctx.clearRect(0,0,SnakeLib.General.Width,SnakeLib.General.Height);
 
-    if (SnakeLib.General.Timer > 0) {
-      SnakeLib.General.Timer -= 0.01;
-      if (SnakeLib.Settings.UpdateTimer)
-        SnakeLib.UpdateTimer();
-    }
-    else {
-      clearInterval(SnakeLib.General.GameLoopID);
-      if (SnakeLib.Settings.MultiPlayer) {
-        (Player.Score > Player2.Score ? alert(Player.Name + " wins!") : alert(Player2.Name + " wins!"));
-      }
-      else
-        alert(Player.Name + " got " + Player.Score + " points!");
-    }
+    SnakeLib.TickTime(); 
 
     SnakeLib.Fruit.Red.Draw();
     SnakeLib.Fruit.Green.Draw();

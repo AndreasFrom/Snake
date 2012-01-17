@@ -5,6 +5,7 @@ GetData = function()
   Output["MultiPlayer"] = document.getElementById("multiplayer").checked;
   Output["Canvas"] = document.getElementById("canvas");
   Output["Timer"] = document.getElementById("timer");
+  Output["TimerInput"] = document.getElementById("timerinput").value;
   Output["Controls1"] = document.getElementById("controls1");
   Output["Controls2"] = document.getElementById("controls2");
   Output["Name1"] = document.getElementById("name1").value;
@@ -34,10 +35,12 @@ StartGame = function () {
   Snake.HTML.Score1 = Data['Score1'];
   Snake.HTML.Score2 = Data['Score2'];
   Snake.HTML.Timer = Data['Timer'];
-  Snake.Settings.UpdateTimer = true;
-  Snake.Settings.UpdateScore = true;
 
   Snake.Init(Data['MultiPlayer']);
+
+  Snake.Settings.Timer = Data['TimerInput'];
+  Snake.Settings.ShowTimer = true;
+  Snake.Settings.ShowScore = true;
 
   if (Data['MultiPlayer']) {
     Data['Score2'].setAttribute("style","color:"+Data['Color2']);
@@ -50,7 +53,7 @@ StartGame = function () {
 
   document.body.removeChild(document.getElementById("controls"));
 
-  Data['Score'].setAttribute("style","visibility:hidden");
+  Data['Score'].setAttribute("style","visibility:visible");
 
   Snake.Player.Name = Data['Name1'];
   Snake.Player.Color = Data['Color1'];

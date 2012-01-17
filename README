@@ -19,8 +19,8 @@ MinimalGame.HTML.Canvas = document.getElementById("myCanvas");
 MinimalGame.Init();
 MinimalGame.StartGame();
 
-This will start a singleplayer game with a black snake called "Snake";
-The timer will be 60 seconds, but invisible.
+This will start a singleplayer game with a black snake called "Snake".
+There will be no timelimit.
 
 SnakeLib.HTML.Canvas is mandatory and must be set before running Init();
 It must be a canvas HTML element.
@@ -30,6 +30,7 @@ Following settings are optional (Score2 is only needed if MultiPlayer is true):
 * SnakeLib.Player.Color = string;
 * SnakeLib.Player.Name = string;
 * SnakeLib.Settings.ShowTimer = bool;
+** SnakeLib.Settings.Timer = seconds;
 ** SnakeLib.HTML.Timer = HTML element;
 * SnakeLib.Settings.ShowScore = bool;
 ** SnakeLib.HTML.Score1 = HTML element;
