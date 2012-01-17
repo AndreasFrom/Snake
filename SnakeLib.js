@@ -167,7 +167,7 @@ var SnakeLib = {
     var sec = ~~(SnakeLib.Settings.Timer);
     var minutes = ~~(sec / 60),sec = sec - (minutes * 60);
 
-    if (SnakeLib.Settings.Timer != "false")
+    if (SnakeLib.Settings.Timer != "infinite")
     SnakeLib.HTML.Timer.innerHTML = (minutes < 10 ? "0"+minutes : minutes) + ":"+ (sec < 10 ? "0"+sec : sec);
     else
       SnakeLib.HTML.Timer.innerHTML = "∞";
