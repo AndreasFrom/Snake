@@ -30,7 +30,7 @@ Following settings are optional (Score2 is only needed if MultiPlayer is true):
 * SnakeLib.Player.Color = string;
 * SnakeLib.Player.Name = string;
 * SnakeLib.Settings.ShowTimer = bool;
-** SnakeLib.Settings.Timer = seconds;
+** SnakeLib.Settings.Timer = seconds or "infinity";
 ** SnakeLib.HTML.Timer = HTML element;
 * SnakeLib.Settings.ShowScore = bool;
 ** SnakeLib.HTML.Score1 = HTML element;
