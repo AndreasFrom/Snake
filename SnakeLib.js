@@ -64,7 +64,7 @@ var SnakeLib = {
 
       ctx.beginPath();
       ctx.fillStyle = this.Color;
-      for (var i=0;i<this.SnakeLength;i++){
+      for (var i=0;i<this.SnakeLength;i+=this.Radius/4){
         if (this.Pos[i]) {
           ctx.rect(this.Pos[i].X-this.Radius/2,this.Pos[i].Y-this.Radius/2,this.Radius,this.Radius);
         }
