@@ -64,7 +64,7 @@ var SnakeLib = {
 
       ctx.beginPath();
       ctx.fillStyle = this.Color;
-      for (var i=0;i<this.SnakeLength;i+=this.Radius/4){
+      for (var i=0;i<this.SnakeLength;i+=1){
         if (this.Pos[i]) {
           ctx.rect(this.Pos[i].X-this.Radius/2,this.Pos[i].Y-this.Radius/2,this.Radius,this.Radius);
         }
@@ -90,7 +90,7 @@ var SnakeLib = {
     this.HandleFruitCollision = function(_Fruit,_Length,_Score,_Speed) {
       if (this.Pos[0].X+this.Radius/2 >= (_Fruit.Pos.X-_Fruit.Radius) && this.Pos[0].X-this.Radius/2 <= (_Fruit.Pos.X+_Fruit.Radius) && this.Pos[0].Y+this.Radius/2 >= (_Fruit.Pos.Y-_Fruit.Radius) && this.Pos[0].Y-this.Radius/2 <= (_Fruit.Pos.Y+_Fruit.Radius)) {
         this.SnakeLength += _Length;
-        this.Score += Math.round(_Score);
+        this.Score += Math.round(_Score*(_Fruit.Radius/10));
         this.Velocity += _Speed;
         _Fruit.Radius = SnakeLib.General.FullFruitRadius;
         _Fruit.Calc();
